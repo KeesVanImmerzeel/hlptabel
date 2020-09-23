@@ -3,4 +3,27 @@
 \docType{package}
 \name{hlptabel}
 \alias{hlptabel}
-\title{hlptabel: a package}
+\title{hlptabel: Calculate reduction in crop production caused by waterlogging and drought.}
+\description{
+Based on the publication "De invloed van de waterhuishouding op de landbouwkundige produktie".
+Rapport van de werkgroep HELP-tabel, Mededelingen Landinrichtingsdienst 176 (1987).
+\href{https://edepot.wur.nl/188152}{Rapport van de werkgroep HELP-tabel}
+}
+\details{
+Approximate analytical formulas are used to calculate the reduction in crop productions.
+
+This package exports no sample data sets/objects
+
+This package exports the following functions:
+\itemize{
+\item \code{\link{ht_reduction}}
+\item \code{\link{ht_soilnr_to_HELPnr}}
+\item \code{\link{ht_bofek_to_HELPnr}}
+\item \code{\link{ht_soil_unit_to_HELPnr}}
+\item \code{\link{ht_soil_units}}
+\item \code{\link{ht_bofek_numbers}}
+\item \code{\link{ht_HELPnr_to_HELPcode}}
+\item \code{\link{ht_tab_calc_values}}
+\item \code{\link{ht_plot_tab_calc_values}}
+}
+}
