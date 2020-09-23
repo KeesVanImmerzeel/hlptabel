@@ -36,7 +36,7 @@ x$V10 <-
 x$V10[x$V10 == "0"] <- "Droogteschade"
 x$V10[x$V10 == "1"] <- "Natschade"
 x$V10 %<>% as.factor() %>% relevel("Natschade") # Make "Natschade" first
-x$ID <- 1:nrow(boot113)
+x$ID <- 1:nrow(x)
 names(x) <-
   c("A",
     "B",
@@ -109,7 +109,7 @@ max_HELP_nr <- 70
 # crop production due to water logging or drought.
 # Initial values are stored in data frame "boot113".
 
-#' @param aard Nature of the reduction in crop production ("Natschade", "Droogteschade") (character)
+# @param aard Nature of the reduction in crop production ("Natschade", "Droogteschade") (character)
 optim_pars <- function(x, aard) {
   HELP <- x[1]
   landuse <- x[2]
@@ -194,30 +194,6 @@ hist(boot113$RMSE[141:280], main="RMSE drought", xlab="RMSE", ylab="Frequency")
 landuse_str <- c("Grasland","Bouwland")
 aard_str <- c("Natschade","Droogteschade")
 
-## Save internal objects to file "R/sysdata.rda"
-usethis::use_data(
-  HELP1987,
-  boot113,
-  HELPNR,
-  BODEMGEBRUIK,
-  AARDDEPRESSIE,
-
-  bofek_help,
-  bodem_help,
-  BOFEK,
-  EENHEID,
-  max_HELP_nr,
-
-  landuse_str,
-  aard_str,
-
-  chk_red_gras,
-  chk_red_bouw,
-
-  overwrite = TRUE,
-  internal = TRUE
-)
-
 ## Prepare check objects chk_red_gras and chk_red_bouw for function ht_reduction()
 chk_red_gras <-
   ht_reduction(
@@ -235,7 +211,7 @@ chk_red_bouw <-
     GLG = 1.4
   )
 
-## Save AGAIN internal objects to file "R/sysdata.rda so that the correct check objects are stored."
+## Save internal objects to file "R/sysdata.rda so that the correct check objects are stored."
 usethis::use_data(
   HELP1987,
   boot113,
