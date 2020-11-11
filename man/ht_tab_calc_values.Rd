@@ -9,7 +9,7 @@ ht_tab_calc_values(HELP, landuse, aard)
 \arguments{
 \item{HELP}{HELP (soil) number 1-70 (integer).}
 
-\item{landuse}{1=grassland; 2=arable land (numeric)}
+\item{landuse}{1=grassland; 2=arable land (integer)}
 
 \item{aard}{Nature of the reduction in crop production ("Natschade", "Droogteschade") (character)}
 }

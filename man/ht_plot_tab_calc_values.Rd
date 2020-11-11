@@ -9,7 +9,7 @@ ht_plot_tab_calc_values(HELP, landuse)
 \arguments{
 \item{HELP}{HELP (soil) number 1-70 (integer).}
 
-\item{landuse}{1=grassland; 2=arable land (numeric)}
+\item{landuse}{1=grassland; 2=arable land (integer)}
 }
 \value{
 plot with tabulated and calculated reductions in crop production.

@@ -13,13 +13,13 @@ ht_reduction(GHG, GLG, HELP, landuse)
 
 \item{HELP}{HELP (soil) number 1-70 (integer).}
 
-\item{landuse}{1=grassland; 2=arable land (numeric)}
+\item{landuse}{1=grassland; 2=arable land (integer)}
 }
 \value{
-Calculated reduction in crop production (list). Elements in this list:
-red_wl: caused by waterlogging (\%); (numeric)
-red_dr: caused by drought (\%); (numeric)
-red_tot: total (\%) (numeric)
+Calculated reduction in crop production (numeric vector). Three elements:
+1: caused by waterlogging (\%); (numeric)
+2: caused by drought (\%); (numeric)
+3: total (\%) (numeric)
 }
 \description{
 Calculate reduction in crop production caused by waterlogging and drought.

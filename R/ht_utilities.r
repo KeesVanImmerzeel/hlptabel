@@ -221,11 +221,11 @@ ht_plot_tab_calc_values <- function(HELP, landuse) {
 #' @inheritParams .chaste_GHG
 #' @inheritParams .chaste_GLG
 #' @param HELP HELP (soil) number 1-70 (integer).
-#' @param landuse 1=grassland; 2=arable land (numeric)
-#' @return Calculated reduction in crop production (list). Elements in this list:
-#'         red_wl: caused by waterlogging (%); (numeric)
-#'         red_dr: caused by drought (%); (numeric)
-#'         red_tot: total (%) (numeric)
+#' @param landuse 1=grassland; 2=arable land (integer)
+#' @return Calculated reduction in crop production (numeric vector). Three elements:
+#'         1: caused by waterlogging (%); (numeric)
+#'         2: caused by drought (%); (numeric)
+#'         3: total (%) (numeric)
 #' @examples
 #' HELP <- 15
 #' landuse <- 1
@@ -234,18 +234,17 @@ ht_plot_tab_calc_values <- function(HELP, landuse) {
 #' ht_reduction( GHG, GLG, HELP, landuse )
 #' @export
 ht_reduction <- function(GHG, GLG, HELP, landuse) {
-  res <- NA
+  res <- c(NA,NA,NA)
   x <-
     boot113 %>% dplyr::filter(HELPNR == HELP &
                                 as.numeric(BODEMGEBRUIK) == landuse) %>% dplyr::arrange(dplyr::desc(AARDDEPRESSIE))
   x <- cbind(x$A, x$B, x$C, x$D, x$E)
   if (nrow(x) > 0) {
     if (GHG < GLG) {
-      res <- list()
-      res$red_dr <- .fdr(x[1,], GLG)
-      res$red_wl <-
+      res[1] <-
         .fwl(x[2,], GHG, GLG, min_red = x[2,5])
-      res$red_tot <- .ftot(res$red_wl, res$red_dr)
+      res[2] <- .fdr(x[1,], GLG)
+      res[3] <- .ftot(res[1], res[2])
     }
   }
   return(res)

@@ -12,7 +12,7 @@ of reduction in crop production caused drought.}
 
 \item{HELP}{HELP (soil) number 1-70 (integer).}
 
-\item{landuse}{1=grassland; 2=arable land (numeric)}
+\item{landuse}{1=grassland; 2=arable land (integer)}
 }
 \value{
 Root-mean-square error (numeric)
