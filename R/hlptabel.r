@@ -28,6 +28,14 @@
 #'
 #' * \code{\link{ht_plot_tab_calc_values}}
 #'
+#' @details
+#' You might consider to reclassify the HELP numbers 71 and 72 to the most similar soil codes in the HELP-table (1987).
+#' if `x` is the raster with HELP numbers (1-72), reclassify with:
+#'
+#' `x[x[]==71] <- 67`
+#'
+#' `x[x[]==72] <- 60`
+#'
 #' @docType package
 #' @name hlptabel
 #'

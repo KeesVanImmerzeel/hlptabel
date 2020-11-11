@@ -58,8 +58,17 @@ To get help on the functions in this package type a question mark before the fun
 
 In the HELP-table (1987) the HELP numbers 71 and 72 where not included. Therefore, calculation of the reduction in crop production is not possible for the following bofek numbers: 301, 305, 306, 314, 315 and 319 (soil units Hd21, Hn21g, Hn21t, pZg23t, Hn23x, cHn23x).
 
+You might consider to reclassify the HELP numbers 71 and 72 to the most similar soil codes in the HELP-table (1987) (refer [2] page 16). if `x` is the raster with HELP numbers (1-72), reclassify with: 
+
+`x[x[]==71] <- 67`
+
+`x[x[]==72] <- 60`
+
+
 # References
 
-*"De invloed van de waterhuishouding op de landbouwkundige produktie".
-Rapport van de werkgroep HELP-tabel, Mededelingen Landinrichtingsdienst 176 (1987).*
+1. *De invloed van de waterhuishouding op de landbouwkundige produktie*
+Rapport van de werkgroep HELP-tabel, Mededelingen Landinrichtingsdienst 176 (1987).
 
+2. *HELP-2005. stowa rapport 2005/16.* 
+Uitbreiding en actualisering van de HELP-tabellen ten behoeve van het Waternood-instrumentarium.
