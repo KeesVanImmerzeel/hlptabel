@@ -235,6 +235,9 @@ ht_plot_tab_calc_values <- function(HELP, landuse) {
 #' @export
 ht_reduction <- function(GHG, GLG, HELP, landuse) {
   res <- c(NA,NA,NA)
+  if (is.na(GHG)|is.na(GLG)|is.na(HELP)|is.na(landuse)) {
+    return(res)
+  }
   x <-
     boot113 %>% dplyr::filter(HELPNR == HELP &
                                 as.numeric(BODEMGEBRUIK) == landuse) %>% dplyr::arrange(dplyr::desc(AARDDEPRESSIE))
