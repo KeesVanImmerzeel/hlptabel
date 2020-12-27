@@ -253,7 +253,7 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
   return(res)
 }
 
-#' Helper function for function ht_reduction_brk()
+#' Helper function for function ht_reduction_brk().
 #' @param x Numeric vector with four elements:
 #' \describe{
 #'   \item{GHG}{Average highest groundwater level, relative to soil surface level (m)}
