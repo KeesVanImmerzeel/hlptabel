@@ -1,0 +1,25 @@
+[general]
+creator=R package 'raster'
+created=2020-11-17 16:14:56
+[georeference]
+nrows=80
+ncols=80
+xmin=222000
+ymin=453000
+xmax=224000
+ymax=455000
+projection=NA
+[data]
+datatype=FLT4S
+byteorder=little
+nbands=4
+bandorder=BIL
+minvalue=-0.0714502334594727:0.572999000549316:20:1
+maxvalue=2.76423001289368:3.6377170085907:53:2
+nodatavalue=-3.4e+38
+[legend]
+legendtype=
+values=
+color=
+[description]
+layername=GHG:GLG:HELP:landuse
