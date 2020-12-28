@@ -244,16 +244,17 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
   x <- cbind(x$A, x$B, x$C, x$D, x$E)
   if (nrow(x) > 0) {
     if (GHG < GLG) {
-      res[1] <-
+      res <- list()
+      res$red_dr <- .fdr(x[1,], GLG)
+      res$red_wl <-
         .fwl(x[2,], GHG, GLG, min_red = x[2,5])
-      res[2] <- .fdr(x[1,], GLG)
-      res[3] <- .ftot(res[1], res[2])
+      res$red_tot <- .ftot(res$red_wl, res$red_dr)
     }
   }
   return(res)
 }
 
-#' Helper function for function ht_reduction_brk().
+#' Helper function for function '.ht_reduction_brk()'.
 #' @param x Numeric vector with four elements:
 #' \describe{
 #'   \item{GHG}{Average highest groundwater level, relative to soil surface level (m)}
@@ -291,15 +292,29 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
 #'   \item{tot}{Total reduction in crop production caused by both waterlogging and drought (%)}
 #'   \item{landuse}{ 1=grassland; 2=arable land}
 #' }
-#' @examples
+#' @details This is the single-core version of the function 'ht_reduction_brk()'.
+# @examples
 #' x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
-#' raster::beginCluster(exclude="hlptabel")
-#' r <- raster::clusterR(x,ht_reduction_brk)
-#' raster::endCluster()
-#' @export
-ht_reduction_brk <- function(x){
+#' r <- .ht_reduction_brk(x)
+.ht_reduction_brk <- function(x){
   res <- x %>% raster::calc( .f  )
   names(res) <- c("wl","dr","tot")
+  return(res)
+}
+
+#' Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
+#'
+#' @inherit .ht_reduction_brk
+#' @details Muliple-cores are used to compute the results.
+#' @examples
+#' x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
+#' r <- ht_reduction_brk(x)
+#' @export
+ht_reduction_brk <- function(x) {
+  raster::beginCluster()
+  res <- raster::clusterR(x, .ht_reduction_brk)
+  raster::endCluster()
+  names(res) <- c("wl", "dr", "tot")
   return(res)
 }
 

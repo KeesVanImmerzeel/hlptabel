@@ -41,7 +41,7 @@ Then load the package with:
 
 ## Functions in this package
 - `ht_reduction()`: Calculate reduction in crop production caused by waterlogging and drought.
-- `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
+- `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input. Multiple-cores are used in the calculation.
 - `ht_soilnr_to_HELPnr()`: Get HELP number by specifying a soil number (1010, ..., 22020).
 - `ht_bofek_to_HELPnr()`: Get HELP number by specifying a bofek number.
 - `ht_soil_unit_to_HELPnr()`: Get HELP number by specifying a soil unit ("soil_unit").
@@ -55,17 +55,11 @@ Then load the package with:
 
 To get help on the functions in this package type a question mark before the function name, like `?ht_reduction()`
 
-## Multi-Core Cluster usage (example usage).
+## RasterBrick example.
 
 ```
-library(raster)
-library(tictoc)
 x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
-tic("Function ht_reduction_brk()")
-raster::beginCluster(exclude="hlptabel")
-r <- clusterR(x,ht_reduction_brk)
-raster::endCluster()
-toc()
+r <- ht_reduction_brk(x)
 ```
 
 ## Remarks
