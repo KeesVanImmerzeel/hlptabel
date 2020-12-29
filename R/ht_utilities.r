@@ -222,10 +222,10 @@ ht_plot_tab_calc_values <- function(HELP, landuse) {
 #' @inheritParams .chaste_GLG
 #' @param HELP HELP (soil) number 1-70 (integer).
 #' @param landuse 1=grassland; 2=arable land (integer)
-#' @return Calculated reduction in crop production (numeric vector). Three elements:
-#'         1: caused by waterlogging (%); (numeric)
-#'         2: caused by drought (%); (numeric)
-#'         3: total (%) (numeric)
+#' @return Calculated reduction in crop production (list) with three elements:
+#'         red_wl: caused by waterlogging (%); (numeric)
+#'         red_dr: caused by drought (%); (numeric)
+#'         red_tot: (%) (numeric)
 #' @examples
 #' GHG <- 0.25
 #' GLG <- 1.4
@@ -245,9 +245,9 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
   if (nrow(x) > 0) {
     if (GHG < GLG) {
       res <- list()
-      res$red_dr <- .fdr(x[1,], GLG)
       res$red_wl <-
         .fwl(x[2,], GHG, GLG, min_red = x[2,5])
+      res$red_dr <- .fdr(x[1,], GLG)
       res$red_tot <- .ftot(res$red_wl, res$red_dr)
     }
   }
