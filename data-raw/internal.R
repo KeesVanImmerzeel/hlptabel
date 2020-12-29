@@ -211,6 +211,12 @@ chk_red_bouw <-
     GLG = 1.4
   )
 
+## Prepare check objects chk_red_brk for function ht_reduction_brk()
+## Remark: INSTALL THIS PACKAGE FIRST so that the different processes in the multicore
+## application use the latest version.
+x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
+chk_red_brk <- ht_reduction_brk(x)
+
 ## Save internal objects to file "R/sysdata.rda so that the correct check objects are stored."
 usethis::use_data(
   HELP1987,
@@ -230,6 +236,7 @@ usethis::use_data(
 
   chk_red_gras,
   chk_red_bouw,
+  chk_red_brk,
 
   overwrite = TRUE,
   internal = TRUE
