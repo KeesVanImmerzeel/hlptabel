@@ -8,7 +8,7 @@ library(readxl)
 
 ## Read original HELP tables 1987
 f <- function(HELPNR) {
-  x <- readxl::read_excel(path = "data-raw/help-tabellen 1987.xlsx",
+  x <- readxl::read_excel(path = "help-tabellen 1987.xlsx",
                           sheet = as.character(HELPNR),
                           range = "A2:F16") %>% as.data.frame()
   names(x) <- c("GHG","GLG","grasnat","grasdroog","bouwnat","bouwdroog")
@@ -19,7 +19,7 @@ HELP1987 <- sapply(1:70,f)
 #HELP1987[,HELPNR]
 
 ## prepare internal `boot113` dataset with parameters A-E
-fname <- "data-raw/Boot113.EP0"
+fname <- "Boot113.EP0"
 x <-
   readLines(fname) %>%  grep("\t", ., value = TRUE) %>% stringr::str_split_fixed("\t", 8) %>% as.data.frame()
 xn <- x[, 1:7]
@@ -59,10 +59,11 @@ BODEMGEBRUIK <- "Grasland"
 AARDDEPRESSIE <- "Natschade"
 
 ## Translation of Bofek codes to HELP number
-bofek_help <- read.csv2("data-raw/wur/NHI_BOFEK_HELP.csv",sep=",")
+bofek_help <- read.csv2("Bofek2HELP/BOFEK2012_HELP.csv",sep=",")
+names(bofek_help) <- c("BOFEK", "HELP")
 
 ## Read soil descriptions ("EENHEID") corresponding to Bofek codes ("BOFEK")
-df <- readxl::read_excel(path = "data-raw/BOFEK2012_profielen_versie2_1.xlsx",
+df <- readxl::read_excel(path = "BOFEK2012_profielen_versie2_1.xlsx",
                         sheet = "Dominant profiel",
                         range = "A1:D308") %>% as.data.frame()
 
@@ -87,8 +88,8 @@ bofek_help %<>% dplyr::left_join(x)
 # - BODEMNR (1010, ..., 22020)
 # - HELPNR (1-72)
 # - EENHEID: bodemeenheid ("hVc" etc)
-x1 <- read.csv2("data-raw/wur/BODEM_Eenheid_654.csv",sep=",")
-x2 <- read.csv2("data-raw/wur/BODEM_HELP.csv",sep=",") # niet alle HELP nummers komen in de tabel voor (dwz zijn gekoppeld aan een bodem)
+x1 <- read.csv2("wur/BODEM_Eenheid_654.csv",sep=",")
+x2 <- read.csv2("wur/BODEM_HELP.csv",sep=",") # niet alle HELP nummers komen in de tabel voor (dwz zijn gekoppeld aan een bodem)
 bodem_help <- x1 %>% dplyr::inner_join(x2, by="ID")
 remove_trailing_letter <- function(x) {
   gsub("(_[A-Z]$)|(_[a-z]$)","",x)

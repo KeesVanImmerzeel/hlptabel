@@ -4,7 +4,10 @@
 \alias{ht_bofek_numbers}
 \title{Valid bofek numbers.}
 \usage{
-ht_bofek_numbers()
+ht_bofek_numbers(version = 2012)
+}
+\arguments{
+\item{version}{Bofek version (2012 or 2020).}
 }
 \value{
 bofek (integer)

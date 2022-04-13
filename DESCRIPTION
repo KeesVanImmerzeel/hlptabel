@@ -8,23 +8,16 @@ Authors@R:
            email = "c.h.van.immerzeel@gmail.com",
            comment = c(ORCID = "https://orcid.org/0000-0003-0926-3248"))
 Maintainer: Kees van Immerzeel <c.h.van.immerzeel@gmail.com>
-Description: Calculate reduction in crop production caused by waterlogging and drought.
-    Based on the publication "De invloed van de waterhuishouding op de landbouwkundige produktie".
-    Rapport van de werkgroep HELP-tabel, Mededelingen Landinrichtingsdienst 176 (1987).
-    Approximate analytical formulas are used to calculate the reduction in crop productions.
+Description: Calculate with a simplified model the soil water content, groundwater table etc.
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-Imports: 
-    magrittr,
-    dplyr,
-    stats,
-    ggplot2,
-    raster,
-    snow
+RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)
-Suggests: 
-    testthat
+Imports: 
+    ggplot2,
+    dplyr,
+    magrittr,
+    raster
