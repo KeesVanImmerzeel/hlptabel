@@ -8,7 +8,7 @@ Authors@R:
            email = "c.h.van.immerzeel@gmail.com",
            comment = c(ORCID = "https://orcid.org/0000-0003-0926-3248"))
 Maintainer: Kees van Immerzeel <c.h.van.immerzeel@gmail.com>
-Description: Calculate with a simplified model the soil water content, groundwater table etc.
+Description: Calculate the reduction in crop production caused by waterlogging and drought using the 1987 HELP tables.
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
@@ -20,4 +20,6 @@ Imports:
     ggplot2,
     dplyr,
     magrittr,
-    raster
+    raster,
+    terra,
+    testthat
