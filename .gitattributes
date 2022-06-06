@@ -6,3 +6,4 @@ data-raw/Bofek2020/*.tif filter=lfs diff=lfs merge=lfs -text
 *.xlsx filter=lfs diff=lfs merge=lfs -text
 *.asc filter=lfs diff=lfs merge=lfs -text
 *.html filter=lfs diff=lfs merge=lfs -text
+data-raw/Landuse_2022/*.tif filter=lfs diff=lfs merge=lfs -text
