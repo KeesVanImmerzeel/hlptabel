@@ -7,6 +7,9 @@
 \format{
 An object of class \code{RasterLayer} of dimension 12494 x 10580 x 1.
 }
+\source{
+\url{https://www.wur.nl/nl/show/bodemfysische-eenhedenkaart-bofek2020.htm}
+}
 \usage{
 HELP_map_NL2020
 }

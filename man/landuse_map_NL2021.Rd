@@ -7,6 +7,9 @@
 \format{
 An object of class \code{RasterLayer} of dimension 13000 x 10800 x 1.
 }
+\source{
+\url{https://www.pdok.nl/downloads/-/article/basisregistratie-topografie-brt-historie}
+}
 \usage{
 landuse_map_NL2021
 }
