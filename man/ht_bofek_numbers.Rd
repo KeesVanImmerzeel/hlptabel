@@ -11,10 +11,8 @@ ht_bofek_numbers(version = 2012)
 }
 \value{
 bofek (integer)
+ht_bofek_numbers()
 }
 \description{
 Valid bofek numbers.
-}
-\examples{
-ht_bofek_numbers()
 }

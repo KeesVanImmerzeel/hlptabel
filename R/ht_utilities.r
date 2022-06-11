@@ -123,6 +123,8 @@ ht_tab_calc_values <- function(HELP, landuse, aard) {
 #' ht_plot_tab_calc_values(HELP=15, landuse=1)
 #' @export
 ht_plot_tab_calc_values <- function(HELP, landuse) {
+  aard <- NULL
+  red_HELP_table <- red_calculated <- NULL
   red_dr <- ht_tab_calc_values(HELP, landuse, aard = "Droogteschade")
   red_wl <- ht_tab_calc_values(HELP, landuse, aard = "Natschade")
   df <-
@@ -323,7 +325,7 @@ ht_reduction_brk <- function(x) {
 #' @param bofek Bofek2012 number(integer).
 #' @param version Bofek version (2012 or 2020).
 #' @return HELP HELP (soil) number 1-70 (integer).
-#' @examples
+# @examples
 #' ht_bofek_to_HELPnr( 101 )
 ht_bofek_to_HELPnr <- function(bofek, version = 2012) {
   res <- NA
@@ -340,9 +342,10 @@ ht_bofek_to_HELPnr <- function(bofek, version = 2012) {
 #'
 #' @param soilnr Soil number (1010, ..., 22020) (integer).
 #' @return HELP HELP (soil) number 1-70 (integer).
-#' @examples
+# @examples
 #' ht_soilnr_to_HELPnr( 1030 )
 ht_soilnr_to_HELPnr <- function(soilnr) {
+  BODEMNR <- NULL
   res <- NA
   x <- bodem_help %>% dplyr::filter(BODEMNR == soilnr & HELPNR <= max_HELP_nr)
   if (nrow(x) > 0) {
@@ -355,9 +358,10 @@ ht_soilnr_to_HELPnr <- function(soilnr) {
 #'
 #' @param soil_unit Soil unit (character).
 #' @return HELP HELP (soil) number 1-70 (integer).
-#' @examples
+# @examples
 #' ht_soil_unit_to_HELPnr( "faVzt" )
 ht_soil_unit_to_HELPnr <- function(soil_unit) {
+  HELP <- NULL
   res <- NA
   x <- bofek_help %>% dplyr::filter(EENHEID == soil_unit & HELP <= max_HELP_nr)
   if (nrow(x) > 0) {
@@ -370,7 +374,7 @@ ht_soil_unit_to_HELPnr <- function(soil_unit) {
 #'
 #' @inheritParams ht_reduction
 #' @return HELPcode (character).
-#' @examples
+# @examples
 #' ht_HELPnr_to_HELPcode( HELP=15 )
 ht_HELPnr_to_HELPcode <- function(HELP) {
   res <- NA
@@ -384,7 +388,7 @@ ht_HELPnr_to_HELPcode <- function(HELP) {
 #' Valid soil units.
 #'
 #' @return soil units (character vector)
-#' @examples
+# @examples
 #' ht_soil_units()
 ht_soil_units <- function() {
   unique(bofek_help$EENHEID)
@@ -394,7 +398,7 @@ ht_soil_units <- function() {
 #'
 #' @inheritParams ht_bofek_to_HELPnr
 #' @return bofek (integer)
-#' @examples
+# @examples
 #' ht_bofek_numbers()
 ht_bofek_numbers <- function(version=2012) {
   res <- NA

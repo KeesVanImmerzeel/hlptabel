@@ -11,10 +11,8 @@ ht_soilnr_to_HELPnr(soilnr)
 }
 \value{
 HELP HELP (soil) number 1-70 (integer).
+ht_soilnr_to_HELPnr( 1030 )
 }
 \description{
 Get HELP number by specifying a soil number (1010, ..., 22020).
-}
-\examples{
-ht_soilnr_to_HELPnr( 1030 )
 }

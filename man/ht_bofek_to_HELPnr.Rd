@@ -13,10 +13,8 @@ ht_bofek_to_HELPnr(bofek, version = 2012)
 }
 \value{
 HELP HELP (soil) number 1-70 (integer).
+ht_bofek_to_HELPnr( 101 )
 }
 \description{
 Get HELP number by specifying a bofek2012 number.
-}
-\examples{
-ht_bofek_to_HELPnr( 101 )
 }

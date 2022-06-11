@@ -8,10 +8,8 @@ ht_soil_units()
 }
 \value{
 soil units (character vector)
+ht_soil_units()
 }
 \description{
 Valid soil units.
-}
-\examples{
-ht_soil_units()
 }

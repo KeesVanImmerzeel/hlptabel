@@ -11,10 +11,8 @@ ht_HELPnr_to_HELPcode(HELP)
 }
 \value{
 HELPcode (character).
+ht_HELPnr_to_HELPcode( HELP=15 )
 }
 \description{
 Get HELP (soil) code by specifying HELP number.
-}
-\examples{
-ht_HELPnr_to_HELPcode( HELP=15 )
 }

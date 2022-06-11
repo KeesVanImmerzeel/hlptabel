@@ -11,10 +11,8 @@ ht_soil_unit_to_HELPnr(soil_unit)
 }
 \value{
 HELP HELP (soil) number 1-70 (integer).
+ht_soil_unit_to_HELPnr( "faVzt" )
 }
 \description{
 Get HELP number by specifying a soil unit ("soil_unit").
-}
-\examples{
-ht_soil_unit_to_HELPnr( "faVzt" )
 }
