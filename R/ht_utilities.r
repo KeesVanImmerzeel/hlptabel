@@ -325,7 +325,6 @@ ht_reduction_brk <- function(x) {
 #' @return HELP HELP (soil) number 1-70 (integer).
 #' @examples
 #' ht_bofek_to_HELPnr( 101 )
-#' @export
 ht_bofek_to_HELPnr <- function(bofek, version = 2012) {
   res <- NA
   if (version == 2012) {
@@ -343,7 +342,6 @@ ht_bofek_to_HELPnr <- function(bofek, version = 2012) {
 #' @return HELP HELP (soil) number 1-70 (integer).
 #' @examples
 #' ht_soilnr_to_HELPnr( 1030 )
-#' @export
 ht_soilnr_to_HELPnr <- function(soilnr) {
   res <- NA
   x <- bodem_help %>% dplyr::filter(BODEMNR == soilnr & HELPNR <= max_HELP_nr)
@@ -359,7 +357,6 @@ ht_soilnr_to_HELPnr <- function(soilnr) {
 #' @return HELP HELP (soil) number 1-70 (integer).
 #' @examples
 #' ht_soil_unit_to_HELPnr( "faVzt" )
-#' @export
 ht_soil_unit_to_HELPnr <- function(soil_unit) {
   res <- NA
   x <- bofek_help %>% dplyr::filter(EENHEID == soil_unit & HELP <= max_HELP_nr)
@@ -375,7 +372,6 @@ ht_soil_unit_to_HELPnr <- function(soil_unit) {
 #' @return HELPcode (character).
 #' @examples
 #' ht_HELPnr_to_HELPcode( HELP=15 )
-#' @export
 ht_HELPnr_to_HELPcode <- function(HELP) {
   res <- NA
   x <- boot113 %>% dplyr::filter(HELPNR == HELP)
@@ -390,7 +386,6 @@ ht_HELPnr_to_HELPcode <- function(HELP) {
 #' @return soil units (character vector)
 #' @examples
 #' ht_soil_units()
-#' @export
 ht_soil_units <- function() {
   unique(bofek_help$EENHEID)
 }
@@ -401,7 +396,6 @@ ht_soil_units <- function() {
 #' @return bofek (integer)
 #' @examples
 #' ht_bofek_numbers()
-#' @export
 ht_bofek_numbers <- function(version=2012) {
   res <- NA
   if (version==2012) {

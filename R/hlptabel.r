@@ -14,29 +14,13 @@
 #'
 #' * \code{\link{ht_reduction_brk}}: Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
 #'
-#' * \code{\link{ht_soilnr_to_HELPnr}}: Get HELP number by specifying a soil number (1010, ..., 22020).
-#'
-#' * \code{\link{ht_bofek_to_HELPnr}}: Get HELP number by specifying a bofek number.
-#'
-#' * \code{\link{ht_soil_unit_to_HELPnr}}: Get HELP number by specifying a soil unit ("soil_unit").
-#'
-#' * \code{\link{ht_soil_units}}: Valid soil units.
-#'
-#' * \code{\link{ht_bofek_numbers}}: Valid bofek numbers.
-#'
-#' * \code{\link{ht_HELPnr_to_HELPcode}}: Get HELP (soil) code by specifying HELP number.
-#'
 #' * \code{\link{ht_tab_calc_values}}: Tabulated and calculated reductions in crop production.
 #'
 #' * \code{\link{ht_plot_tab_calc_values}}: Plot of tabulated and calculated reductions in crop production.
 #'
 #' @details
 #' You might consider to reclassify the HELP numbers 71 and 72 to the most similar soil codes in the HELP-table (1987).
-#' if `x` is the raster with HELP numbers (1-72), reclassify with:
-#'
-#' `x[x[]==71] <- 67`
-#'
-#' `x[x[]==72] <- 60`
+#' HELP number 71 --> 67; HELP number 72 --> 60. Dataset HELP_map_NL2020 is already converted in this way.
 #'
 #' @docType package
 #' @name hlptabel

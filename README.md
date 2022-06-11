@@ -1,3 +1,9 @@
+---
+Title:    Package 'hlptabel'  
+Author:   C.H. van Immerzeel  
+Date:     juni 11, 2022  
+---
+
 # Package "helptabel"
 
 <!-- badges: start -->
@@ -5,7 +11,10 @@
 [![Travis Build Status](https://travis-ci.org/KeesVanImmerzeel/helptabel.svg?branch=master)](https://travis-ci.org/KeesVanImmerzeel/helptabel)
 <!-- badges: end -->
 
-The package "helptabel" can be used to estimate the reduction in crop production caused by waterlogging and drought. The groundwater regime is characterized by the mean (average) lowest and highest groundwaterlevel ("GHG and "GLG"). 
+Estimate the reduction in crop production caused by waterlogging and drought using relations documented in [1].
+Datasets for the Netherlands characterizing the soils and landuse are included in this package.
+
+The groundwater regime is characterized by the mean (average) lowest and highest groundwaterlevel ("GHG and "GLG"). 
 70 different soil types are distinguished and two types of land use (grassland and arable land).
 
 ![](https://user-images.githubusercontent.com/16401251/90639879-9c30b700-e22f-11ea-9dbc-8f11e6a3e82a.png)
@@ -18,7 +27,7 @@ For the calculation of the reduction in crop production caused by waterlogging (
 
 For the calculation of the reduction in crop production caused by drought ("Droogteschade"), the red parameters A-E are optimized against the tabulated values in the "HELP-tabel (1987).
 
-The "data-raw" folder contains the "original" HELP tables, as well as the optimization code.
+The "data-raw" folder contains the "original" (1987) HELP tables, as well as the optimization code.
 
 Differences between the values calculated with the above formulas and the tabulated values are typically small. The frequency distributions of the root-mean-square error values illustrate this, as well as the comparison between tabulated and calculated reduction values for the soil HELP=15 (landuse = grassland).
 
@@ -39,17 +48,16 @@ Then load the package with:
 
 `library("hlptabel")` 
 
-## Functions in this package
+## Functions
 - `ht_reduction()`: Calculate reduction in crop production caused by waterlogging and drought.
 - `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input. Multiple-cores are used in the calculation.
-- `ht_soilnr_to_HELPnr()`: Get HELP number by specifying a soil number (1010, ..., 22020).
-- `ht_bofek_to_HELPnr()`: Get HELP number by specifying a bofek number.
-- `ht_soil_unit_to_HELPnr()`: Get HELP number by specifying a soil unit ("soil_unit").
-- `ht_soil_units()`: Valid soil units.
-- `ht_bofek_numbers()`: Valid bofek numbers.
-- `ht_HELPnr_to_HELPcode`: Get HELP (soil) code by specifying HELP number.
 - `ht_tab_calc_values()`: Tabulated and calculated reductions in crop production.
 - `ht_tab_calc_values()`: Plot of tabulated and calculated reductions in crop production.
+
+## Datasets
+- `HELP_map_NL2020`: Raster map of 1987 HELP codes for the Netherlands, based on the Bofek2020 raster map. Resolution 25x25m.
+- `landuse_map_NL2021`: Raster map (resolution 25x25m) of landuse (2021) based on the TOP25raster_GEOTIFF dataset 2021.
+
 
 ## Get help
 
@@ -64,13 +72,7 @@ r <- ht_reduction_brk(x)
 
 ## Remarks
 
-In the HELP-table (1987) the HELP numbers 71 and 72 where not included. Therefore, calculation of the reduction in crop production is not possible for the following bofek numbers: 301, 305, 306, 314, 315 and 319 (soil units Hd21, Hn21g, Hn21t, pZg23t, Hn23x, cHn23x).
-
-You might consider to reclassify the HELP numbers 71 and 72 to the most similar soil codes in the HELP-table (1987) (refer [2] page 16). if `x` is the raster with HELP numbers (1-72), reclassify with: 
-
-`x[x[]==71] <- 67`
-
-`x[x[]==72] <- 60`
+In the HELP-table (1987) the HELP numbers 71 and 72 where not included. You might consider to reclassify the HELP numbers 71 and 72 to the most similar soil codes in the HELP-table (1987) (refer [2] page 16). HELP number 71 --> 67; HELP number 72 --> 60. Dataset `HELP_map_NL2020` is already converted in this way.
 
 
 # References
@@ -80,3 +82,7 @@ Rapport van de werkgroep HELP-tabel, Mededelingen Landinrichtingsdienst 176 (198
 
 2. *HELP-2005. stowa rapport 2005/16.* 
 Uitbreiding en actualisering van de HELP-tabellen ten behoeve van het Waternood-instrumentarium.
+
+3. *BOFEK2020 – Bodemfysische schematisatie van Nederland; Update bodemfysische eenhedenkaart*
+Heinen, M., F. Brouwer, K. Teuling, D. Walvoort, 2021. Wageningen Environmental Research.
+[Rapport 3056](https://edepot.wur.nl/541544)
