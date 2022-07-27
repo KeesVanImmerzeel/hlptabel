@@ -394,7 +394,7 @@ ht_soil_units <- function() {
   unique(bofek_help$EENHEID)
 }
 
-#' Valid bofek numbers.
+#' Valid Bofek numbers.
 #'
 #' @inheritParams ht_bofek_to_HELPnr
 #' @return bofek (integer)

@@ -59,7 +59,7 @@ BODEMGEBRUIK <- "Grasland"
 AARDDEPRESSIE <- "Natschade"
 
 ## Translation of Bofek codes to HELP number
-bofek_help <- read.csv2("Bofek2HELP/BOFEK2012_HELP.csv",sep=",")
+bofek_help <- read.csv2("data-raw/Bofek2020/BOFEK2020_HELP.csv",sep=",")
 names(bofek_help) <- c("BOFEK", "HELP")
 
 ## Read soil descriptions ("EENHEID") corresponding to Bofek codes ("BOFEK")
