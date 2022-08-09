@@ -8,7 +8,7 @@
 An object of class \code{RasterLayer} of dimension 13000 x 10800 x 1.
 }
 \source{
-\url{https://www.pdok.nl/downloads/-/article/basisregistratie-topografie-brt-historie}
+\href{https://geodata.nationaalgeoregister.nl/top25raster/extract/kaartbladtotaal/top25raster-geotiff-landsdekkend.zip?formaat=geotiff&datum=2021-11-23}{TOP25raster}
 }
 \usage{
 landuse_map_NL2021

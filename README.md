@@ -52,7 +52,7 @@ Then load the package with:
 - `ht_reduction()`: Calculate reduction in crop production caused by waterlogging and drought.
 - `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input. Multiple-cores are used in the calculation.
 - `ht_tab_calc_values()`: Tabulated and calculated reductions in crop production.
-- `ht_tab_calc_values()`: Plot of tabulated and calculated reductions in crop production.
+- `ht_plot_calc_values()`: Plot of tabulated and calculated reductions in crop production.
 
 ## Datasets
 - `HELP_map_NL2020`: Raster map of 1987 HELP codes for the Netherlands, based on the Bofek2020 raster map. Resolution 25x25m.

@@ -2,17 +2,14 @@
 % Please edit documentation in R/ht_utilities.r
 \name{ht_bofek_numbers}
 \alias{ht_bofek_numbers}
-\title{Valid bofek numbers.}
+\title{Valid Bofek (2020) numbers.}
 \usage{
-ht_bofek_numbers(version = 2012)
-}
-\arguments{
-\item{version}{Bofek version (2012 or 2020).}
+ht_bofek_numbers()
 }
 \value{
 bofek (integer)
 ht_bofek_numbers()
 }
 \description{
-Valid bofek numbers.
+Valid Bofek (2020) numbers.
 }

@@ -2,19 +2,17 @@
 % Please edit documentation in R/ht_utilities.r
 \name{ht_bofek_to_HELPnr}
 \alias{ht_bofek_to_HELPnr}
-\title{Get HELP number by specifying a bofek2012 number.}
+\title{Get HELP number by specifying a Bofek2020 number.}
 \usage{
-ht_bofek_to_HELPnr(bofek, version = 2012)
+ht_bofek_to_HELPnr(bofek)
 }
 \arguments{
-\item{bofek}{Bofek2012 number(integer).}
-
-\item{version}{Bofek version (2012 or 2020).}
+\item{bofek}{Bofek2020 number(integer).}
 }
 \value{
 HELP HELP (soil) number 1-70 (integer).
 ht_bofek_to_HELPnr( 101 )
 }
 \description{
-Get HELP number by specifying a bofek2012 number.
+Get HELP number by specifying a Bofek2020 number.
 }

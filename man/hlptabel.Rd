@@ -12,9 +12,7 @@ Rapport van de werkgroep HELP-tabel, Mededelingen Landinrichtingsdienst 176 (198
 \details{
 Approximate analytical formulas are used to calculate the reduction in crop productions.
 
-https://r-pkgs.org/data.html
-
-This package exports the following functions:
+The following functions are exported:
 \itemize{
 \item \code{\link{ht_reduction}}: Calculate reduction in crop production caused by waterlogging and drought.
 \item \code{\link{ht_reduction_brk}}: Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
@@ -22,6 +20,14 @@ This package exports the following functions:
 \item \code{\link{ht_plot_tab_calc_values}}: Plot of tabulated and calculated reductions in crop production.
 }
 
+The following datasets are exported:
+\itemize{
+\item \code{\link{HELP_map_NL2020}}: HELP map of the Netherlands based on the Bofek2020 map.
+\item \code{\link{landuse_map_NL2021}}: Landuse map of the Netherlands based on the top25raster map.
+}
+
 You might consider to reclassify the HELP numbers 71 and 72 to the most similar soil codes in the HELP-table (1987).
-HELP number 71 --> 67; HELP number 72 --> 60. Dataset HELP_map_NL2020 is already converted in this way.
+\href{https://library.wur.nl/WebQuery/wurpubs/fulltext/27040}{HELP-2005 Stowa rapport 2005/16 (page 16)}
+HELP number 71 --> 67; HELP number 72 --> 60.
+Dataset \code{\link{HELP_map_NL2020}} is already converted in this way.
 }

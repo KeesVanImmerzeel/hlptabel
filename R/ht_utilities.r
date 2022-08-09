@@ -320,55 +320,52 @@ ht_reduction_brk <- function(x) {
   return(res)
 }
 
-#' Get HELP number by specifying a bofek2012 number.
+#' Get HELP number by specifying a Bofek2020 number.
 #'
-#' @param bofek Bofek2012 number(integer).
-#' @param version Bofek version (2012 or 2020).
+#' @param bofek Bofek2020 number(integer).
 #' @return HELP HELP (soil) number 1-70 (integer).
 # @examples
 #' ht_bofek_to_HELPnr( 101 )
-ht_bofek_to_HELPnr <- function(bofek, version = 2012) {
+ht_bofek_to_HELPnr <- function(bofek) {
   res <- NA
-  if (version == 2012) {
-    x <- bofek_help %>% dplyr::filter(BOFEK == bofek)
-    if (nrow(x) > 0) {
-      res <- x$HELP
-    }
-  }
-  return(res)
-}
-
-#' Get HELP number by specifying a soil number (1010, ..., 22020).
-#'
-#' @param soilnr Soil number (1010, ..., 22020) (integer).
-#' @return HELP HELP (soil) number 1-70 (integer).
-# @examples
-#' ht_soilnr_to_HELPnr( 1030 )
-ht_soilnr_to_HELPnr <- function(soilnr) {
-  BODEMNR <- NULL
-  res <- NA
-  x <- bodem_help %>% dplyr::filter(BODEMNR == soilnr & HELPNR <= max_HELP_nr)
-  if (nrow(x) > 0) {
-    res <- x$HELPNR
-  }
-  return(res)
-}
-
-#' Get HELP number by specifying a soil unit ("soil_unit").
-#'
-#' @param soil_unit Soil unit (character).
-#' @return HELP HELP (soil) number 1-70 (integer).
-# @examples
-#' ht_soil_unit_to_HELPnr( "faVzt" )
-ht_soil_unit_to_HELPnr <- function(soil_unit) {
-  HELP <- NULL
-  res <- NA
-  x <- bofek_help %>% dplyr::filter(EENHEID == soil_unit & HELP <= max_HELP_nr)
+  x <- bofek_help %>% dplyr::filter(BOFEK == bofek)
   if (nrow(x) > 0) {
     res <- x$HELP
   }
   return(res)
 }
+
+# Get HELP number by specifying a soil number (1010, ..., 22020).
+#
+# @param soilnr Soil number (1010, ..., 22020) (integer).
+# @return HELP HELP (soil) number 1-70 (integer).
+# @examples
+# ht_soilnr_to_HELPnr( 1030 )
+#ht_soilnr_to_HELPnr <- function(soilnr) {
+#  BODEMNR <- NULL
+#  res <- NA
+#  x <- bodem_help %>% dplyr::filter(BODEMNR == soilnr & HELPNR <= max_HELP_nr)
+#  if (nrow(x) > 0) {
+#    res <- x$HELPNR
+#  }
+#  return(res)
+#}
+
+# Get HELP number by specifying a soil unit ("soil_unit").
+#
+# @param soil_unit Soil unit (character).
+# @return HELP HELP (soil) number 1-70 (integer).
+# @examples
+# ht_soil_unit_to_HELPnr( "faVzt" )
+#ht_soil_unit_to_HELPnr <- function(soil_unit) {
+#  HELP <- NULL
+#  res <- NA
+#  x <- bofek_help %>% dplyr::filter(EENHEID == soil_unit & HELP <= max_HELP_nr)
+#  if (nrow(x) > 0) {
+#    res <- x$HELP
+#  }
+#  return(res)
+#}
 
 #' Get HELP (soil) code by specifying HELP number.
 #'
@@ -385,27 +382,22 @@ ht_HELPnr_to_HELPcode <- function(HELP) {
   return(res)
 }
 
-#' Valid soil units.
-#'
-#' @return soil units (character vector)
+# Valid soil units.
+#
+# @return soil units (character vector)
 # @examples
-#' ht_soil_units()
-ht_soil_units <- function() {
-  unique(bofek_help$EENHEID)
-}
+# ht_soil_units()
+#ht_soil_units <- function() {
+#  unique(bofek_help$EENHEID)
+#}
 
-#' Valid Bofek numbers.
+#' Valid Bofek (2020) numbers.
 #'
-#' @inheritParams ht_bofek_to_HELPnr
 #' @return bofek (integer)
 # @examples
 #' ht_bofek_numbers()
-ht_bofek_numbers <- function(version=2012) {
-  res <- NA
-  if (version==2012) {
-    res <- unique(bofek_help$BOFEK)
-  }
-  return(res)
+ht_bofek_numbers <- function() {
+ unique(bofek_help$BOFEK)
 }
 
 

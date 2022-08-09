@@ -8,7 +8,7 @@
 An object of class \code{RasterLayer} of dimension 12494 x 10580 x 1.
 }
 \source{
-\url{https://www.wur.nl/nl/show/bodemfysische-eenhedenkaart-bofek2020.htm}
+\href{https://www.wur.nl/nl/show/bodemfysische-eenhedenkaart-bofek2020.htm}{Bofek2020}
 }
 \usage{
 HELP_map_NL2020
@@ -16,5 +16,10 @@ HELP_map_NL2020
 \description{
 Raster map of 1987 HELP codes for the Netherlands, based on the Bofek2020 raster map.
 Resolution 25x25m.
+}
+\details{
+The HELP numbers 71 and 72 are converted to the most similar soil codes in the HELP-table (1987).
+\href{https://library.wur.nl/WebQuery/wurpubs/fulltext/27040}{HELP-2005 Stowa rapport 2005/16 (page 16)}
+HELP number 71 --> 67; HELP number 72 --> 60.
 }
 \keyword{datasets}

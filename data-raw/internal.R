@@ -8,7 +8,7 @@ library(readxl)
 
 ## Read original HELP tables 1987
 f <- function(HELPNR) {
-  x <- readxl::read_excel(path = "help-tabellen 1987.xlsx",
+  x <- readxl::read_excel(path = "data-raw/help-tabellen 1987.xlsx",
                           sheet = as.character(HELPNR),
                           range = "A2:F16") %>% as.data.frame()
   names(x) <- c("GHG","GLG","grasnat","grasdroog","bouwnat","bouwdroog")
@@ -19,7 +19,7 @@ HELP1987 <- sapply(1:70,f)
 #HELP1987[,HELPNR]
 
 ## prepare internal `boot113` dataset with parameters A-E
-fname <- "Boot113.EP0"
+fname <- "data-raw/Boot113.EP0"
 x <-
   readLines(fname) %>%  grep("\t", ., value = TRUE) %>% stringr::str_split_fixed("\t", 8) %>% as.data.frame()
 xn <- x[, 1:7]
@@ -59,17 +59,17 @@ BODEMGEBRUIK <- "Grasland"
 AARDDEPRESSIE <- "Natschade"
 
 ## Translation of Bofek codes to HELP number
-bofek_help <- read.csv2("data-raw/Bofek2020/BOFEK2020_HELP.csv",sep=",")
+bofek_help <- read.csv2("data-raw/HELP_map_NL2020/BOFEK2020_HELP.csv",sep=",")
 names(bofek_help) <- c("BOFEK", "HELP")
 
 ## Read soil descriptions ("EENHEID") corresponding to Bofek codes ("BOFEK")
-df <- readxl::read_excel(path = "BOFEK2012_profielen_versie2_1.xlsx",
-                        sheet = "Dominant profiel",
-                        range = "A1:D308") %>% as.data.frame()
+#df <- readxl::read_excel(path = "BOFEK2012_profielen_versie2_1.xlsx",
+#                        sheet = "Dominant profiel",
+#                        range = "A1:D308") %>% as.data.frame()
 
 ## Add soil descriptions ("EENHEID") to table "bofek_help"
-x <- data.frame(BOFEK=df$BOFEK2012,EENHEID=df$Eenheid) %>% dplyr::distinct()
-bofek_help %<>% dplyr::left_join(x)
+#x <- data.frame(BOFEK=df$BOFEK2012,EENHEID=df$Eenheid) %>% dplyr::distinct()
+#bofek_help %<>% dplyr::left_join(x)
 
 ## Add soil number ("BODEMNR") table "bofek_help".
 # Fields in "bofek_help" (72 rows):
@@ -79,8 +79,8 @@ bofek_help %<>% dplyr::left_join(x)
 #      voor het berekenen van landbouwschade)
 #  - EENHEID: bodemeenheid ("hVc" etc)
 #  - BODEMNR (1050, ..., 18050)
-x <- data.frame(BOFEK=df$BOFEK2012,BODEMNR=df$Bodemnr) %>% dplyr::distinct()
-bofek_help %<>% dplyr::left_join(x)
+#x <- data.frame(BOFEK=df$BOFEK2012,BODEMNR=df$Bodemnr) %>% dplyr::distinct()
+#bofek_help %<>% dplyr::left_join(x)
 
 # Create table "bodem_help"
 # (Used for translation from "BODEMNR" (1010, ..., 22020) to HELP number 1-72)
@@ -88,23 +88,23 @@ bofek_help %<>% dplyr::left_join(x)
 # - BODEMNR (1010, ..., 22020)
 # - HELPNR (1-72)
 # - EENHEID: bodemeenheid ("hVc" etc)
-x1 <- read.csv2("wur/BODEM_Eenheid_654.csv",sep=",")
-x2 <- read.csv2("wur/BODEM_HELP.csv",sep=",") # niet alle HELP nummers komen in de tabel voor (dwz zijn gekoppeld aan een bodem)
-bodem_help <- x1 %>% dplyr::inner_join(x2, by="ID")
-remove_trailing_letter <- function(x) {
-  gsub("(_[A-Z]$)|(_[a-z]$)","",x)
-}
-bodem_help$BODEMNR <- remove_trailing_letter(bodem_help$ABGN) %>% as.numeric()
-bodem_help %<>% dplyr::select(-c(ABGN,KLEUR,ID))
+#x1 <- read.csv2("wur/BODEM_Eenheid_654.csv",sep=",")
+#x2 <- read.csv2("wur/BODEM_HELP.csv",sep=",") # niet alle HELP nummers komen in de tabel voor (dwz zijn gekoppeld aan een bodem)
+#bodem_help <- x1 %>% dplyr::inner_join(x2, by="ID")
+#remove_trailing_letter <- function(x) {
+#  gsub("(_[A-Z]$)|(_[a-z]$)","",x)
+#}
+#bodem_help$BODEMNR <- remove_trailing_letter(bodem_help$ABGN) %>% as.numeric()
+#bodem_help %<>% dplyr::select(-c(ABGN,KLEUR,ID))
 
 ## Define global variables with fieldnames in data frame "bofek_help"
 ## in order to prevent the note "no visible binding for global variable"
 ## in the output of devtools::check(document = FALSE)
-BOFEK <- 101
-EENHEID <- "hVc"
+BOFEK <- 1001
+#EENHEID <- "hVc"
 
 ## Define usefull constants
-max_HELP_nr <- 70
+#max_HELP_nr <- 70
 
 # Optimize, for all soil / landuse combinations, the parameters of the functions to calculate the reduction of
 # crop production due to water logging or drought.
@@ -220,17 +220,17 @@ chk_red_brk <- ht_reduction_brk(x)
 
 ## Save internal objects to file "R/sysdata.rda so that the correct check objects are stored."
 usethis::use_data(
-  HELP1987,
-  boot113,
+  HELP1987,                # Tabulated values of HELP 1987 table
+  boot113,                 # internal dataset with parameters A-E that are used in the approximate analytical formulas to calculate the reduction in crop productions
   HELPNR,
   BODEMGEBRUIK,
   AARDDEPRESSIE,
 
   bofek_help,
-  bodem_help,
+  #bodem_help,
   BOFEK,
-  EENHEID,
-  max_HELP_nr,
+  #EENHEID,
+  #max_HELP_nr,
 
   landuse_str,
   aard_str,

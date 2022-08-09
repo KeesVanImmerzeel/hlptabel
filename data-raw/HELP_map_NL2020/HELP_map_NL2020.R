@@ -11,6 +11,7 @@ HELP_map_NL2020 <- x %>% terra::classify(rcl, others=NA )
 # Renumber these HELP numbers to the most similar soil codes in the HELP-table (1987).
 # HELP-2005. stowa rapport 2005/16, page 16.
 # 'Uitbreiding en actualisering van de HELP-tabellen ten behoeve van het Waternood-instrumentarium'.
+# https://library.wur.nl/WebQuery/wurpubs/fulltext/27040
 m <- c(71, 67,
        72, 60)
 rcl <- matrix(m, ncol=2, byrow=TRUE)
