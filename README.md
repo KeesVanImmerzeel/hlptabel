@@ -58,6 +58,12 @@ Then load the package with:
 - `HELP_map_NL2020`: Raster map of 1987 HELP codes for the Netherlands, based on the Bofek2020 raster map. Resolution 25x25m.
 - `landuse_map_NL2021`: Raster map (resolution 25x25m) of landuse (2021) based on the TOP25raster_GEOTIFF dataset 2021.
 
+To use these datasets, the following code can be used:
+
+- `HELP_map_NL2020 <- file.path( find.package("hlptabel"), "extdata", "HELP_map_NL2020.tif") |> terra::rast()`
+
+- `landuse_map_NL2021 <- file.path( find.package("hlptabel"), "extdata", "landuse_map_NL2021.tif") |> terra::rast()`
+
 
 ## Get help
 

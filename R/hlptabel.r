@@ -16,16 +16,22 @@
 #'
 #' * \code{\link{ht_plot_tab_calc_values}}: Plot of tabulated and calculated reductions in crop production.
 #'
-# The following datasets are exported:
+#' The following datasets are included in the package:
 #'
-# * \code{\link{HELP_map_NL2020}}: HELP map of the Netherlands based on the Bofek2020 map.
-# * \code{\link{landuse_map_NL2021}}: Landuse map of the Netherlands based on the top25raster map.
+#' * \strong{HELP_map_NL2020}: HELP map of the Netherlands based on the Bofek2020 map.
+#' * \strong{landuse_map_NL2021}: Landuse map of the Netherlands based on the top25raster map.
+#'
+#' To use these datasets, the following code can be used:
+#'
+#' * `HELP_map_NL2020 <- file.path( find.package("hlptabel"), "extdata", "HELP_map_NL2020.tif") |> terra::rast()`
+#'
+#' * `landuse_map_NL2021 <- file.path( find.package("hlptabel"), "extdata", "landuse_map_NL2021.tif") |> terra::rast()`
 #'
 #' @details
 #' You might consider to reclassify the HELP numbers 71 and 72 to the most similar soil codes in the HELP-table (1987).
 #' [HELP-2005 Stowa rapport 2005/16 (page 16)](https://library.wur.nl/WebQuery/wurpubs/fulltext/27040)
 #' HELP number 71 --> 67; HELP number 72 --> 60.
-# Dataset \code{\link{HELP_map_NL2020}} is already converted in this way.
+#' Dataset \strong{HELP_map_NL2020} is already converted in this way.
 #'
 #' @name hlptabel
 #'
