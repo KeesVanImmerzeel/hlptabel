@@ -1,10 +1,9 @@
 library(magrittr)
 library(terra)
-library(raster)
 
 # Reclassify Bofek2020 raster map to create HELP map.
-rcl <- "BOFEK2020_HELP.csv" %>% file.path("data-raw","Bofek2020",.) %>% read.table(header=TRUE, sep=",")
-x <- "BOFEK2020.tif" %>% file.path("data-raw","Bofek2020",.) %>% terra::rast()
+rcl <- "BOFEK2020_HELP.csv" %>% file.path("data-raw","HELP_map_NL2020",.) %>% read.table(header=TRUE, sep=",")
+x <- "BOFEK2020.tif" %>% file.path("data-raw","HELP_map_NL2020",.) %>% terra::rast()
 HELP_map_NL2020 <- x %>% terra::classify(rcl, others=NA )
 
 # In the HELP-table (1987) the HELP numbers 71 and 72 where not included.
@@ -17,7 +16,6 @@ m <- c(71, 67,
 rcl <- matrix(m, ncol=2, byrow=TRUE)
 HELP_map_NL2020 <-  terra::classify(HELP_map_NL2020, rcl )
 
-# Use result.
-# SpatRaster breaks when saved as an R object, so convert to raster format before writing to rda-file.
-HELP_map_NL2020%<>% raster::raster()
-usethis::use_data(HELP_map_NL2020, internal = FALSE, overwrite=TRUE, version=2)
+# Save result to inst/extdata folder
+fname <- file.path("inst", "extdata", "HELP_map_NL2020.tif")
+HELP_map_NL2020 |> terra::writeRaster(fname, overwrite=TRUE)

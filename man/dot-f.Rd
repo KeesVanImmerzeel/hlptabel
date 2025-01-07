@@ -2,7 +2,7 @@
 % Please edit documentation in R/ht_utilities.r
 \name{.f}
 \alias{.f}
-\title{Helper function for function '.ht_reduction_brk()'.}
+\title{Helper function for function 'ht_reduction_brk()'.}
 \usage{
 .f(x)
 }
@@ -24,5 +24,5 @@ Numeric vector with reduction in crop production:
 }
 }
 \description{
-Helper function for function '.ht_reduction_brk()'.
+Helper function for function 'ht_reduction_brk()'.
 }

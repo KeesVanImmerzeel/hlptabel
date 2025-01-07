@@ -256,7 +256,7 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
   return(res)
 }
 
-#' Helper function for function '.ht_reduction_brk()'.
+#' Helper function for function 'ht_reduction_brk()'.
 #' @param x Numeric vector with four elements:
 #' \describe{
 #'   \item{GHG}{Average highest groundwater level, relative to soil surface level (m)}
@@ -274,51 +274,55 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
 # x <- c(0.25,1.4,15,1)
 # .f(x)
 .f <- function(x){
-  res <- ht_reduction(GHG=x[1], GLG=x[2], HELP=x[3], landuse=x[4])
+  res <- hlptabel::ht_reduction(GHG=x[1], GLG=x[2], HELP=x[3], landuse=x[4])
   return(c(res$red_wl,res$red_dr,res$red_tot))
 }
 
-#' Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
+#' Calculate reduction in crop production caused by waterlogging and drought.
 #'
-#' @param x A RasterBrick object with the following Raster layers (in this order):
+#' @param x A Spatraster object with the following layers (in this order):
 #' \describe{
 #'   \item{GHG}{Average highest groundwater level, relative to soil surface level (m)}
 #'   \item{GLG}{Average lowest groundwater level, relative to soil surface level (m)}
 #'   \item{HELP}{(soil) number 1-70}
 #'   \item{landuse}{ 1=grassland; 2=arable land}
 #' }
-#' @return A RasterBrick object with the following Raster layers:
+#' @return A Spatraster object with the following layers:
 #' \describe{
 #'   \item{wl}{Reduction in crop production caused by waterlogging (%)}
 #'   \item{dr}{Reduction in crop production caused by drought (%)}
 #'   \item{tot}{Total reduction in crop production caused by both waterlogging and drought (%)}
 #'   \item{landuse}{ 1=grassland; 2=arable land}
 #' }
-#' @details This is the single-core version of the function 'ht_reduction_brk()'.
-# @examples
-#' x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
-#' r <- .ht_reduction_brk(x)
-.ht_reduction_brk <- function(x){
-  res <- x %>% raster::calc( .f  )
+#' @details Results are created using the function ht_reduction()'.
+#' @examples
+#' x <- terra::rast(system.file("extdata","example_spatraster.tif",package="hlptabel"))
+#' r <- ht_reduction_brk(x)
+#' @export
+ht_reduction_brk <- function(x){
+  #cores <- parallel::detectCores()
+  #cores <- min(cores-1, 8)
+  #res <- x %>% terra::app( .f, cores=cores  )
+  res <- x %>% terra::app( .f  )
   names(res) <- c("wl","dr","tot")
   return(res)
 }
 
-#' Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
-#'
-#' @inherit .ht_reduction_brk
-#' @details Muliple-cores are used to compute the results.
-#' @examples
-#' x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
-#' r <- ht_reduction_brk(x)
-#' @export
-ht_reduction_brk <- function(x) {
-  raster::beginCluster()
-  res <- raster::clusterR(x, .ht_reduction_brk)
-  raster::endCluster()
-  names(res) <- c("wl", "dr", "tot")
-  return(res)
-}
+# Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
+#
+# @inherit .ht_reduction_brk
+# @details Muliple-cores are used to compute the results.
+# @examples
+# x <-  terra::rast(system.file("extdata","example_spatraster.tif",package="hlptabel"))
+# r <- ht_reduction_brk(x)
+# @export
+#ht_reduction_brk <- function(x) {
+  #beginCluster()
+  #res <- clusterR(x, .ht_reduction_brk)
+  #endCluster()
+  #names(res) <- c("wl", "dr", "tot")
+  #return(res)
+#}
 
 #' Get HELP number by specifying a Bofek2020 number.
 #'

@@ -1,7 +1,7 @@
 ---
 Title:    Package 'hlptabel'  
 Author:   C.H. van Immerzeel  
-Date:     juni 11, 2022  
+Date:     januari 6, 2024  
 ---
 
 # Package "helptabel"
@@ -50,7 +50,7 @@ Then load the package with:
 
 ## Functions
 - `ht_reduction()`: Calculate reduction in crop production caused by waterlogging and drought.
-- `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input. Multiple-cores are used in the calculation.
+- `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a SpatRaster object as input. 
 - `ht_tab_calc_values()`: Tabulated and calculated reductions in crop production.
 - `ht_plot_calc_values()`: Plot of tabulated and calculated reductions in crop production.
 
@@ -63,10 +63,10 @@ Then load the package with:
 
 To get help on the functions in this package type a question mark before the function name, like `?ht_reduction()`
 
-## RasterBrick example.
+## SpatRaster example.
 
 ```
-x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
+x <- terra::rast(system.file("extdata","example_spatraster.tif",package="hlptabel"))
 r <- ht_reduction_brk(x)
 ```
 

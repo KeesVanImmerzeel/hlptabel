@@ -1,6 +1,6 @@
 library(magrittr)
 library(terra)
-library(raster)
+#library(raster)
 # Create a landuse map of the Netherlands (units gras=1, akker=2) based on the TOP25raster_GEOTIFF dataset 2021, resolution 25x25m.
 # Source files from:
 # https://geodata.nationaalgeoregister.nl/top25raster/extract/kaartbladtotaal/top25raster-geotiff-landsdekkend.zip?formaat=geotiff&datum=2021-11-23
@@ -64,9 +64,7 @@ m <- c(72, 1,
 rcl <- matrix(m, ncol=2, byrow=TRUE)
 landuse_map_NL2021 <- x %>% terra::classify(rcl, others=NA )
 
-# use result.
-# SpatRaster breaks when saved as an R object, so convert to "raster" format before writing to rda-file.
-landuse_map_NL2021 %<>% raster::raster()
-usethis::use_data(landuse_map_NL2021, overwrite = TRUE)
-
+# Save result to inst/extdata folder
+fname <- file.path("inst", "extdata", "landuse_map_NL2021.tif")
+landuse_map_NL2021 |> terra::writeRaster(fname, overwrite=TRUE)
 

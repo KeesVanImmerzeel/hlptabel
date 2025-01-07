@@ -2,12 +2,12 @@
 % Please edit documentation in R/ht_utilities.r
 \name{ht_reduction_brk}
 \alias{ht_reduction_brk}
-\title{Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.}
+\title{Calculate reduction in crop production caused by waterlogging and drought.}
 \usage{
 ht_reduction_brk(x)
 }
 \arguments{
-\item{x}{A RasterBrick object with the following Raster layers (in this order):
+\item{x}{A Spatraster object with the following layers (in this order):
 \describe{
 \item{GHG}{Average highest groundwater level, relative to soil surface level (m)}
 \item{GLG}{Average lowest groundwater level, relative to soil surface level (m)}
@@ -16,7 +16,7 @@ ht_reduction_brk(x)
 }}
 }
 \value{
-A RasterBrick object with the following Raster layers:
+A Spatraster object with the following layers:
 \describe{
 \item{wl}{Reduction in crop production caused by waterlogging (\%)}
 \item{dr}{Reduction in crop production caused by drought (\%)}
@@ -25,12 +25,12 @@ A RasterBrick object with the following Raster layers:
 }
 }
 \description{
-Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
+Calculate reduction in crop production caused by waterlogging and drought.
 }
 \details{
-Muliple-cores are used to compute the results.
+Results are created using the function ht_reduction()'.
 }
 \examples{
-x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
+x <- terra::rast(system.file("extdata","example_spatraster.tif",package="hlptabel"))
 r <- ht_reduction_brk(x)
 }

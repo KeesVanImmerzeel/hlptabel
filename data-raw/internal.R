@@ -1,3 +1,4 @@
+#setwd("~/myR_on_GitHub/packages/hlptabel")
 library(devtools)
 devtools::load_all()
 
@@ -8,7 +9,7 @@ library(readxl)
 
 ## Read original HELP tables 1987
 f <- function(HELPNR) {
-  x <- readxl::read_excel(path = "data-raw/help-tabellen 1987.xlsx",
+  x <- readxl::read_excel(path = "data-raw/help-tabellen_1987.xlsx",
                           sheet = as.character(HELPNR),
                           range = "A2:F16") %>% as.data.frame()
   names(x) <- c("GHG","GLG","grasnat","grasdroog","bouwnat","bouwdroog")
@@ -174,6 +175,8 @@ max_err_wl <- max(x_wl$RMSE,na.rm=TRUE)
 i_max_wl <- which(x_wl$RMSE == max_err_wl)
 # .rmse_wl(x=boot113[15,],HELP=15,landuse=1)
 # .rmse_wl(x=x_wl[15,],HELP=15,landuse=1)
+fname <- file.path("data-raw", "wl_parameters_optimized.csv")
+x_wl %>% write.csv(fname)
 
 x_dr <-
   apply(df, MARGIN = 1, optim_pars, aard = "Droogteschade") %>% t() %>% as.data.frame()
@@ -183,13 +186,17 @@ max_err_dr <- max(x_dr$RMSE,na.rm=TRUE)
 i_max_dr <- which(x_dr$RMSE == max_err_dr)
 # .rmse_dr(x=boot113[155,],HELP=15,landuse=1)
 # .rmse_dr(x=x_dr[15,],HELP=15,landuse=1)
+fname <- file.path("data-raw", "dr_parameters_optimized.csv")
+x_dr %>% write.csv(fname)
 
 # Replace original parameter values in table boot113 by optimized values
 tmp <- boot113 %>% dplyr::select("HELPNR","HELPCODE","BODEMGEBRUIK", "AARDDEPRESSIE","ID")
 boot113 <- dplyr::inner_join(tmp,rbind(x_wl,x_dr),by="ID") %>% dplyr::arrange(ID)
 
-hist(boot113$RMSE[1:140], main="RMSE waterlogging", xlab="RMSE", ylab="Frequency")
-hist(boot113$RMSE[141:280], main="RMSE drought", xlab="RMSE", ylab="Frequency")
+#hist(boot113$RMSE[1:140], main="RMSE waterlogging", xlab="RMSE (%)", ylab="Frequency")
+#hist(boot113$RMSE[141:280], main="RMSE drought", xlab="RMSE (%)", ylab="Frequency")
+hist(boot113$RMSE[1:140],  main="", xlab="RMSE (%)", ylab="Frequency")
+hist(boot113$RMSE[141:280], main="", xlab="RMSE (%)", ylab="Frequency")
 
 # Labels
 landuse_str <- c("Grasland","Bouwland")
@@ -197,7 +204,7 @@ aard_str <- c("Natschade","Droogteschade")
 
 ## Prepare check objects chk_red_gras and chk_red_bouw for function ht_reduction()
 chk_red_gras <-
-  ht_reduction(
+  hlptabel::ht_reduction(
     HELP = 15,
     landuse = 1,
     GHG = 0.25,
@@ -205,7 +212,7 @@ chk_red_gras <-
   )
 landuse <- 2
 chk_red_bouw <-
-  ht_reduction(
+  hlptabel::ht_reduction(
     HELP = 15,
     landuse = 2,
     GHG = 0.25,
@@ -215,8 +222,8 @@ chk_red_bouw <-
 ## Prepare check objects chk_red_brk for function ht_reduction_brk()
 ## Remark: INSTALL THIS PACKAGE FIRST so that the different processes in the multicore
 ## application use the latest version.
-x <- raster::brick(system.file("extdata","example_brick.grd",package="hlptabel"))
-chk_red_brk <- ht_reduction_brk(x)
+## x <- file.path("data-raw", "example_spatraster.tif") |> terra::rast()
+## chk_red_brk <- hlptabel::ht_reduction_brk(x)
 
 ## Save internal objects to file "R/sysdata.rda so that the correct check objects are stored."
 usethis::use_data(
@@ -237,7 +244,7 @@ usethis::use_data(
 
   chk_red_gras,
   chk_red_bouw,
-  chk_red_brk,
+  #chk_red_brk,
 
   overwrite = TRUE,
   internal = TRUE

@@ -1,0 +1,24 @@
+[1] "############"
+[1] "grasnat"
+[1] "n= 1000"
+Root Mean Square Error (RMSE): 0.8281089 
+Random Error Component (REC) = standaarddeviatie 0.8268576 
+Systematic Error Component (SEC) = het gemiddelde verschil: 0.0526707 
+[1] "############"
+[1] "grasdroog"
+[1] "n= 1000"
+Root Mean Square Error (RMSE): 0.8312079 
+Random Error Component (REC) = standaarddeviatie 0.8315891 
+Systematic Error Component (SEC) = het gemiddelde verschil: -0.008770035 
+[1] "############"
+[1] "bouwnat"
+[1] "n= 1000"
+Root Mean Square Error (RMSE): 0.8420066 
+Random Error Component (REC) = standaarddeviatie 0.8417765 
+Systematic Error Component (SEC) = het gemiddelde verschil: 0.03349126 
+[1] "############"
+[1] "bouwdroog"
+[1] "n= 1000"
+Root Mean Square Error (RMSE): 0.8300692 
+Random Error Component (REC) = standaarddeviatie 0.8290391 
+Systematic Error Component (SEC) = het gemiddelde verschil: 0.04916077 

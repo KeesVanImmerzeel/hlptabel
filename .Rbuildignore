@@ -1,5 +1,4 @@
-^hlptabel\.Rproj$
+^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
-^README.html
-^README.nb.html
+^readme\.html$
