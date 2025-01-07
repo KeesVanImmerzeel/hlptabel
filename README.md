@@ -50,7 +50,7 @@ Then load the package with:
 
 ## Functions
 - `ht_reduction()`: Calculate reduction in crop production caused by waterlogging and drought.
-- `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a SpatRaster object as input. 
+- `ht_reduction_brk()`: Calculate reduction in crop production caused by waterlogging and drought using a SpatRaster object as input. A maximum of 8 cores is used for the calculation.
 - `ht_tab_calc_values()`: Tabulated and calculated reductions in crop production.
 - `ht_plot_calc_values()`: Plot of tabulated and calculated reductions in crop production.
 

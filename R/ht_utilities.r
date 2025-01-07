@@ -299,30 +299,14 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
 #' x <- terra::rast(system.file("extdata","example_spatraster.tif",package="hlptabel"))
 #' r <- ht_reduction_brk(x)
 #' @export
-ht_reduction_brk <- function(x){
-  #cores <- parallel::detectCores()
-  #cores <- min(cores-1, 8)
-  #res <- x %>% terra::app( .f, cores=cores  )
-  res <- x %>% terra::app( .f  )
-  names(res) <- c("wl","dr","tot")
+ht_reduction_brk <- function(x) {
+  cores <- parallel::detectCores()
+  cores <- max(min(cores - 1, 8), 1)
+  print(paste("Cores used:", cores))
+  res <- x %>% terra::app(.f, cores = cores)
+  names(res) <- c("wl", "dr", "tot")
   return(res)
 }
-
-# Calculate reduction in crop production caused by waterlogging and drought using a RasterBrick object as input.
-#
-# @inherit .ht_reduction_brk
-# @details Muliple-cores are used to compute the results.
-# @examples
-# x <-  terra::rast(system.file("extdata","example_spatraster.tif",package="hlptabel"))
-# r <- ht_reduction_brk(x)
-# @export
-#ht_reduction_brk <- function(x) {
-  #beginCluster()
-  #res <- clusterR(x, .ht_reduction_brk)
-  #endCluster()
-  #names(res) <- c("wl", "dr", "tot")
-  #return(res)
-#}
 
 #' Get HELP number by specifying a Bofek2020 number.
 #'
