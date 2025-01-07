@@ -49,6 +49,9 @@
 #' @importFrom ggplot2 element_blank
 #' @importFrom ggplot2 element_text
 #'
-# @importFrom parallel element_text
+#' @importFrom parallel detectCores
+#'
+#' @importFrom terra app
+#' @importFrom terra rast
 
 NULL

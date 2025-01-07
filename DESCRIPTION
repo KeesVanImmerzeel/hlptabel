@@ -22,5 +22,7 @@ Imports:
     dplyr,
     magrittr,
     terra,
-    testthat,
     parallel
+Suggests:
+    testthat
+    
