@@ -300,12 +300,21 @@ ht_reduction <- function(GHG, GLG, HELP, landuse) {
 #' r <- ht_reduction_brk(x)
 #' @export
 ht_reduction_brk <- function(x) {
+  # Set environment variable "_R_CHECK_LIMIT_CORES_" to either "warn" or "false"
+  # in order to exceed the maximum 2 cores allowed by CRAN.
+  # But first: preserve original value of this variable.
+  limit_cores <- Sys.getenv("_R_CHECK_LIMIT_CORES_")
+  Sys.setenv("_R_CHECK_LIMIT_CORES_"="false")
+
+  # Do the parallel calculation with n-cores.
   n <- parallel::detectCores()
   n <- max(min(n - 1, 8), 1)
   print(paste("Cores used:", n))
-  Sys.setenv("_R_CHECK_LIMIT_CORES_"="false")  # Set to either "warn" or "false" in order to exceed the maximum 2 cores allowed by CRAN.
   res <- x %>% terra::app(.f, cores = n)
   names(res) <- c("wl", "dr", "tot")
+
+  # Restore the original value of environment variable "_R_CHECK_LIMIT_CORES_"
+  Sys.setenv("_R_CHECK_LIMIT_CORES_"=limit_cores)
   return(res)
 }
 
